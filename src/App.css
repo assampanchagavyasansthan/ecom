@@ -1,8 +1,8 @@
 /* Mobile */
-@media (max-width: 639px) { 
+@media (max-width: 640px) { 
     .tester {
         width: 100%;
-        height: 70vh; /* Adjust height to a percentage of viewport height */
+        height: auto; /* Adjust height to a percentage of viewport height */
         background-color: white; /* Background color for mobile */
         padding: 20px; /* Add some padding */
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
