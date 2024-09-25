@@ -1,5 +1,5 @@
 /* Mobile */
-@media (max-width: 640px) { 
+@media (max-width: 700px) { 
     .tester {
         width: auto;
         height: auto; /* Adjust height to a percentage of viewport height */
