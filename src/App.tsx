@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
        
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} /> {/* Add this if you have a checkout page */}
+          <Route path="/checkout" element={<Checkout />} />  {/* Add this if you have a checkout page */}
         </Routes>
         <Footer />
       </div>

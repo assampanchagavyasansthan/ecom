@@ -1,11 +1,8 @@
-// src/components/checkout.tsx
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { db } from './fierbase'; // Correct import path for Firestore
+import { db } from './fierbase'; // Ensure this path is correct
 import { collection, addDoc } from 'firebase/firestore'; // Import necessary functions
 import { v4 as uuidv4 } from 'uuid';
-// Import uuid to generate unique order IDs
 import './checkout.css'; // Import the CSS file
 
 // Interface for Product
@@ -16,8 +13,7 @@ interface Product {
   indications: string;
   doses: string;
   weight: string;
-  price: number;
-  category: string;
+  price: string; // Change price to string
 }
 
 // Initial form data state
@@ -40,7 +36,10 @@ const Checkout: React.FC = () => {
 
   // Load cart items from localStorage on component mount
   useEffect(() => {
-    const savedCartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+    const savedCartItems = JSON.parse(localStorage.getItem('cart') || '[]').map((item: Product) => ({
+      ...item,
+      price: item.price.toString(), // Ensure price is a string
+    }));
     setCartItems(savedCartItems);
   }, []);
 
@@ -66,9 +65,9 @@ const Checkout: React.FC = () => {
       ...formData,
       items: cartItems.map(item => ({
         medicineName: item.medicineName,
-        price: item.price,
+        price: item.price, // price will be a string now
       })),
-      totalAmount: cartItems.reduce((acc, item) => acc + item.price, 0),
+      totalAmount: cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0), // Sum the number
     };
 
     try {
@@ -103,110 +102,113 @@ const Checkout: React.FC = () => {
               cartItems.map(item => (
                 <div className="checkout-summary-item" key={item.id}>
                   <span>{item.medicineName}</span>
-                  <span>${item.price.toFixed(2)}</span>
+                  <span>{item.price}</span> {/* Display price correctly */}
                 </div>
               ))
             ) : (
               <p>Your cart is empty.</p>
             )}
           </div>
-          <form className="checkout-form" onSubmit={handleSubmit}>
-            <label>
-              Name:
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="input"
-                required
-              />
-            </label>
-            <label>
-              Address:
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                className="input"
-                required
-              />
-            </label>
-            <label>
-              City:
-              <input
-                type="text"
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                className="input"
-                required
-              />
-            </label>
-            <label>
-              Postal Code:
-              <input
-                type="text"
-                name="postalCode"
-                value={formData.postalCode}
-                onChange={handleChange}
-                className="input"
-                required
-              />
-            </label>
-            <label>
-              Country:
-              <input
-                type="text"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                className="input"
-                required
-              />
-            </label>
-            <label>
-              Phone Number:
-              <input
-                type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                className="input"
-                required
-              />
-            </label>
-            <label>
-              Email:
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="input"
-                required
-              />
-            </label>
-            <label>
-              Payment Method:
-              <select
-                name="paymentMethod"
-                value={formData.paymentMethod}
-                onChange={handleChange}
-                className="ddl"
-                required
-              >
-                <option value="">Select Payment Method</option>
-                <option value="creditCard">Credit Card</option>
-                <option value="paypal">PayPal</option>
-                <option value="cashOnDelivery">Cash on Delivery</option>
-                {/* Add other payment methods as needed */}
-              </select>
-            </label>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <button type="submit" className="btn">Place Order</button>
-          </form>
+
+          {cartItems.length > 0 && (
+            <form className="checkout-form" onSubmit={handleSubmit}>
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="input"
+                  required
+                />
+              </label>
+              <label>
+                Address:
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="input"
+                  required
+                />
+              </label>
+              <label>
+                City:
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="input"
+                  required
+                />
+              </label>
+              <label>
+                Postal Code:
+                <input
+                  type="text"
+                  name="postalCode"
+                  value={formData.postalCode}
+                  onChange={handleChange}
+                  className="input"
+                  required
+                />
+              </label>
+              <label>
+                Country:
+                <input
+                  type="text"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  className="input"
+                  required
+                />
+              </label>
+              <label>
+                Phone Number:
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  className="input"
+                  required
+                />
+              </label>
+              <label>
+                Email:
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="input"
+                  required
+                />
+              </label>
+              <label>
+                Payment Method:
+                <select
+                  name="paymentMethod"
+                  value={formData.paymentMethod}
+                  onChange={handleChange}
+                  className="ddl"
+                  required
+                >
+                  <option value="">Select Payment Method</option>
+                  <option value="creditCard">Credit Card</option>
+                  <option value="paypal">PayPal</option>
+                  <option value="cashOnDelivery">Cash on Delivery</option>
+                  {/* Add other payment methods as needed */}
+                </select>
+              </label>
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
+              <button type="submit" className="btn">Place Order</button>
+            </form>
+          )}
         </>
       )}
       <div className="checkout-footer">
