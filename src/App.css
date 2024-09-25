@@ -1,29 +1,32 @@
-/* Apply box-sizing globally */
-*, *::before, *::after {
-    box-sizing: border-box;
+/* Mobile */
+@media (max-width: 639px) { 
+    .tester {
+        width: 100%;
+        height: 70vh; /* Adjust height to a percentage of viewport height */
+        background-color: white; /* Background color for mobile */
+        padding: 20px; /* Add some padding */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+    }
 }
 
-/* Set a base font size and family */
-body {
-    font-family: Arial, sans-serif;
-    font-size: 16px; /* Base font size */
-    margin: 0;
-    padding: 0;
-    line-height: 1.5;
+/* Tablet */
+@media (min-width: 640px) and (max-width: 959px) {
+    .tester {
+        width: 100%;
+        height: 60vh; /* Adjust height for tablets */
+        background-color: red; /* Background color for tablet */
+        padding: 30px; /* More padding for tablets */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    }   
 }
 
-/* Responsive text size */
-h1 {
-    font-size: 2em;
-}
-
-h2 {
-    font-size: 1.5em;
-}
-
-/* Ensure containers are responsive */
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
+/* Desktop */
+@media (min-width: 960px) {
+    .tester {
+        width: 100%;
+        height: 500px; /* Keep fixed height for desktop if necessary */
+        background-color: blue; /* Background color for desktop */
+        padding: 40px; /* Adjust padding for desktop */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Optional shadow */
+    }   
 }
