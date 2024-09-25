@@ -1,0 +1,29 @@
+/* Apply box-sizing globally */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Set a base font size and family */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px; /* Base font size */
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+/* Responsive text size */
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+/* Ensure containers are responsive */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
