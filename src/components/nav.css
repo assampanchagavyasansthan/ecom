@@ -88,3 +88,10 @@
 .profile-dropdown a:hover {
   background-color: #f1d3f7;
 }
+
+/* Media query to hide the About link on mobile devices */
+@media (max-width: 768px) {
+  .menu li.about-link {
+    display: none; /* Hide the About link */
+  }
+}
