@@ -1,6 +1,6 @@
 import { Route, Routes, Link } from 'react-router-dom';
 import './nav.css';
-import { FaShoppingCart, FaUserCircle } from 'react-icons/fa'; 
+import { FaShoppingCart, FaUserCircle, FaBars } from 'react-icons/fa'; 
 import HomePage from './homepage';
 import About from './Aboutpage';
 import UploadForm from './fierbaseupload';
@@ -13,9 +13,14 @@ import { useState } from 'react';
 
 function Nav() {
   const [showProfileOptions, setShowProfileOptions] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
   
   const toggleProfileOptions = () => {
     setShowProfileOptions(prev => !prev);
+  };
+
+  const toggleSidebar = () => {
+    setShowSidebar(prev => !prev);
   };
 
   // Example order data, replace this with actual order data from your application
@@ -32,13 +37,15 @@ function Nav() {
     <div className="app-container">
       <nav className="menu menu-1">
         <div className="nav-wrapper">
-          <ul>
+          <div className="hamburger" onClick={toggleSidebar}>
+            <FaBars style={{ fontSize: '24px', cursor: 'pointer' }} />
+          </div>
+          <ul className={showSidebar ? 'active' : ''}>
             <li><Link to="/homepage">Home</Link></li>
             <li><Link to="/signeup"></Link></li>
             <li><Link to="/Aboutpage">About</Link></li>
             <li><Link to="/firebaseupload"></Link></li>
             <li><Link to="/displayfierbase">Shop</Link></li>
-          
             <li>
               <Link to="/cardpage">
                 <FaShoppingCart style={{ marginRight: '5px' }} /> Cart
