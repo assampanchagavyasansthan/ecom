@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaInstagram, FaFacebookF, FaWhatsapp, FaEnvelope, FaPhone, FaLeaf } from 'react-icons/fa';
-import './Footer.css'; // Ensure this path is correct
+import './footer.css'; // Ensure this path is correct
 
 const Footer: React.FC = () => {
   return (
