@@ -1,6 +1,6 @@
 // src/HomePage.js
 
-import React from 'react';
+
 import './home.css'; // Ensure you have corresponding CSS for styling
 import { FaDollarSign, FaHeadset, FaShippingFast } from 'react-icons/fa'; 
 const HomePage = () => {

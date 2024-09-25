@@ -1,9 +1,9 @@
-// src/firebase.ts
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAnalytics } from 'firebase/analytics';
 import { getStorage } from 'firebase/storage';
-import { getAuth } from 'firebase/auth'; // Import Firebase Authentication
+import { getAuth } from 'firebase/auth';
+// Remove the following import if you are not using analytics
+// import { getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAN1r32cqgr1LtcNoGRCTGPeeKIsD5ZQXk",
@@ -17,9 +17,11 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+// If you decide to use analytics later, uncomment this line
+// const analytics = getAnalytics(app);
 
 // Export Firestore, Storage, and Authentication instances
 export const db = getFirestore(app);
 export const storage = getStorage(app);
-export const auth = getAuth(app); // Initialize and export Firebase Authentication
+export const auth = getAuth(app);

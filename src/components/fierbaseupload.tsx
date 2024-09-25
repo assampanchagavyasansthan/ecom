@@ -144,7 +144,7 @@ const UploadForm: React.FC = () => {
       </div>
       <button type="submit">Upload</button>
     </form>
-  );c
+  );
 };
 
 export default UploadForm;

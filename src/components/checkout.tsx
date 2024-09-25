@@ -1,10 +1,14 @@
+// src/components/checkout.tsx
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from './fierbase'; // Correct import path for Firestore
 import { collection, addDoc } from 'firebase/firestore'; // Import necessary functions
-import { v4 as uuidv4 } from 'uuid'; // Import uuid to generate unique order IDs
+import { v4 as uuidv4 } from 'uuid';
+// Import uuid to generate unique order IDs
 import './checkout.css'; // Import the CSS file
 
+// Interface for Product
 interface Product {
   id: string;
   imageUrl: string;
@@ -16,25 +20,31 @@ interface Product {
   category: string;
 }
 
-const Checkout: React.FC = () => {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
-  const [formData, setFormData] = useState({
-    name: '',
-    address: '',
-    city: '',
-    postalCode: '',
-    country: '',
-    phoneNumber: '',
-    email: '',
-    paymentMethod: '',
-  });
-  const [orderId, setOrderId] = useState<string | null>(null);
+// Initial form data state
+const initialFormData = {
+  name: '',
+  address: '',
+  city: '',
+  postalCode: '',
+  country: '',
+  phoneNumber: '',
+  email: '',
+  paymentMethod: '',
+};
 
+const Checkout: React.FC = () => {
+  const [cartItems, setCartItems] = useState<Product[]>([]); // State for cart items
+  const [formData, setFormData] = useState(initialFormData); // State for form data
+  const [orderId, setOrderId] = useState<string | null>(null); // State for order ID
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // State for error message
+
+  // Load cart items from localStorage on component mount
   useEffect(() => {
     const savedCartItems = JSON.parse(localStorage.getItem('cart') || '[]');
     setCartItems(savedCartItems);
   }, []);
 
+  // Handle form input changes
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -42,11 +52,15 @@ const Checkout: React.FC = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setErrorMessage(null); // Reset error message
 
+    // Generate unique order ID
     const uniqueOrderId = uuidv4();
 
+    // Prepare order data
     const orderData = {
       orderId: uniqueOrderId,
       ...formData,
@@ -58,13 +72,17 @@ const Checkout: React.FC = () => {
     };
 
     try {
+      // Save order to Firestore
       await addDoc(collection(db, 'orders'), orderData);
       setOrderId(uniqueOrderId);
 
+      // Clear cart and form
       localStorage.removeItem('cart');
       setCartItems([]);
+      setFormData(initialFormData);
     } catch (error) {
       console.error('Error placing order:', error);
+      setErrorMessage('There was an error placing your order. Please try again.');
     }
   };
 
@@ -85,7 +103,7 @@ const Checkout: React.FC = () => {
               cartItems.map(item => (
                 <div className="checkout-summary-item" key={item.id}>
                   <span>{item.medicineName}</span>
-                  <span>${item.price}</span>
+                  <span>${item.price.toFixed(2)}</span>
                 </div>
               ))
             ) : (
@@ -180,11 +198,13 @@ const Checkout: React.FC = () => {
                 required
               >
                 <option value="">Select Payment Method</option>
-                <option value="creditCard">Cash on delevery</option>
-               
+                <option value="creditCard">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="cashOnDelivery">Cash on Delivery</option>
                 {/* Add other payment methods as needed */}
               </select>
             </label>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
             <button type="submit" className="btn">Place Order</button>
           </form>
         </>

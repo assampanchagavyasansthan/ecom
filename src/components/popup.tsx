@@ -1,6 +1,6 @@
 // src/ProductPopup.tsx
 
-import React, { useState } from 'react';
+
 import './popup.css';
 
 interface ProductPopupProps {
