@@ -1,0 +1,71 @@
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  position: absolute;
+  top: 23;
+  left:35px;
+  width: 1300px;
+}
+
+.grid-item {
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 350px;
+}
+.image-box {
+  position: absolute;
+  background-image: url('/h2.jpg'); 
+  left: 38px;
+  top: 120px;
+  width: 1300px;
+  height: 471px;
+  border-radius: 30px;
+  background-color: #f0f0f0;
+}
+
+
+.backgroundbox{
+  width:100px;
+
+  height: 500px;
+}
+
+
+.threemidle{
+
+  width:100px;
+ 
+  height: 750px;
+}
+
+.midbox {
+  display: flex;         /* Use Flexbox layout */
+  justify-content: space-between; /* Distribute space between items */
+  align-items: center;
+  position: relative;
+  left: 38px;
+   width: 1300px;   /* Center items vertically */
+  gap: 100px;             /* Optional: add space between boxes */
+  padding: 10px;         /* Optional: add padding around the container */
+  background-color: #f4f4f4; /* Optional: add background color */
+}
+
+.box {
+  flex: 1;               /* Allow boxes to grow and shrink equally */
+  background-color: #fffdfd; /* Optional: add background color */
+  padding: 20px; 
+ 
+  height: 170px;        /* Optional: add padding inside boxes */
+  text-align: center;    /* Center text inside boxes */
+  border: 1px solid #fbf4f4; /* Optional: add border around boxes */
+}

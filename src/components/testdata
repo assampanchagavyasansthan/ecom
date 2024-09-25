@@ -1,0 +1,74 @@
+// UploadMedicines.js
+import React from 'react';
+import { db } from './fierbase'; // Ensure the correct path to your firebase.js
+import { collection, addDoc } from 'firebase/firestore';
+
+const medicinesData = [
+  {  medicineName: "Kamdhenu Ark", indications: "Anemia, Jaundice, Urinary disorder, Cancer, Increases immunity.", doses: "2 teaspoon twice in 100 ml lukewarm water preferably empty stomach", weight: "200 ml/ 500 ml", price: "Rs. 70/- / 175/-", image: "" },
+  {  medicineName: "Ka. Haldi Ghanvati", indications: "Asthma, Cough, Improves Digestion, Hypertension, Arthritis, Diabetes, Obesity.", doses: "2-2 pills twice with lukewarm water after meals", weight: "60 pills", price: "Rs. 50/-", image: "" },
+  {  medicineName: "Ka. Harde Churna", indications: "Acidity, Gas Trouble, Constipation, Anorexia, Flatulence, Abdominal pain, Rheumatoid Arthritis.", doses: "1 Teaspoonful, twice a day after meals or as directed by physician", weight: "50 gm", price: "Rs. 80/-", image: "" },
+  {  medicineName: "Ka. Malish Tel", indications: "Useful in body massage, Arthritis, Joint & Muscular pains, Sciatica, Paralysis", doses: "For External Use only & apply with Gomutra", weight: "50 ml/ 100 ml", price: "Rs. 100/- / 180/-", image: "" },
+  {  medicineName: "Ka. Shwitranashak Vati", indications: "Highly effective in Leucoderma, and Alopecia, Atrophy without irritating Greying of hair.", doses: "Two pills twice a day, for children one pill twice a day", weight: "60 tablets", price: "Rs. 90/-", image: "" },
+  {  medicineName: "Ka. Shwitranashak Lep", indications: "Highly effective in Leucoderma, Leprosy, Fungal infection of Skin, Psoriasis", doses: "For external use only & apply with Gomutra", weight: "10 tablets", price: "Rs. 90/-", image: "" },
+  {  medicineName: "Ka. Gomyadi Lep Tikiya", indications: "For Bath, Useful in all types of skin disorders increases luster & removes wrinkles.", doses: "An excellent soap-substitute, use for daily bath", weight: "90 gm", price: "Rs. 30/-", image: "" },
+  {  medicineName: "Ka. Isab Tikiya", indications: "Useful in all skin disease, especially useful in 'Isab' Psoriasis Eczema.", doses: "To be rubbed or applied like paste on affected part of the body.", weight: "50 gm", price: "Rs. 50/-", image: "" },
+  {  medicineName: "Ka. Gomay Bhasma Dant Manjan", indications: "For Dental care. Effective in Gingivitis, Pyorrhea, Protects gums, Removes bad breath", doses: "Clean teeth by this product every morning and evening", weight: "60 gm", price: "Rs. 35/-", image: "" },
+  {  medicineName: "Ka. Marham", indications: "Eczema, Itching, Cracked heels, Wounds.", doses: "for external application only", weight: "10 gm", price: "Rs. 35/-", image: "" },
+  {  medicineName: "Ka. Ubatan", indications: "Face pack helpful in acne vulgaris improves luster of skin and tones up face muscles", doses: "for external application only", weight: "50 gm", price: "Rs. 20/-", image: "" },
+  {  medicineName: "Ka. Kshar Churna", indications: "Effective in Asthma and all conditions of cough.", doses: "1 to 2 grams, twice a day with hot water.", weight: "10 gm", price: "Rs. 100/-", image: "" },
+  {  medicineName: "Medohar Ark", indications: "Obesity, Bad odours of sweat, Skin diseases, Liver disorders", doses: "2 teaspoonfuls twice a day before meals or as directed by physician", weight: "100 ml", price: "Rs. 120/-", image: "" },
+  {  medicineName: "Bibhitakavaleh", indications: "Effective in various types of cough, Gastric disorder.", doses: "1-2 teaspoonfuls twice a day after meals or as directed by physician", weight: "100 gm", price: "Rs. 120/-", image: "" },
+  {  medicineName: "Panchagavya Ghrut", indications: "Useful in chronic fever, Epilepsy, Psychosomatic disorders, Skin diseases, Anemia", doses: "2 teaspoonfuls twice a day before meals or as directed by physician", weight: "25 ml", price: "Rs. 120/-", image: "" },
+  {  medicineName: "Astamangal Ghrut", indications: "Good Nervine tonic, Improves memory, promotes concentration, good health supplement.", doses: "One teaspoon full twice a day or as per the advice of physician", weight: "25 ml", price: "Rs. 120/-", image: "" },
+  {  medicineName: "Jatyadi Ghrut", indications: "Useful in chronic fever, Epilepsy, Psychosomatic disorders, Skin diseases, Anemia", doses: "For external application or as directed by physician", weight: "25 ml", price: "Rs. 120/-", image: "" },
+  {  medicineName: "Pachatikta Ghrut", indications: "Leprosy, Vata disorders, Pitta disorders, cough Disorders, Infected wounds.", doses: "2-4 teaspoonfuls twice a day before meals or as directed by physician", weight: "100 ml", price: "Rs. 270/-", image: "" },
+  {  medicineName: "Phala Ghrut", indications: "Menstrual disorder, Spermatogenic, Helps in proper implantation of Embryo", doses: "5-10 ml with milk in the morning or as directed by physician", weight: "50ml / 100 ml", price: "Rs. 230/-", image: "" },
+  {  medicineName: "Shatdhaut Ghrut", indications: "Rakra & Pitta dosha pradhan wounds, Cracked Heels, Dry Skin", doses: "for external use & as directed by physician", weight: "30 ml", price: "Rs. 125/-", image: "" },
+  {  medicineName: "Hingwadya Ghrut", indications: "Gout, Arthritis, Worms, Painful conditions, Flatulence, Loss of appetite.", doses: "2 teaspoonfuls twice a day before meals or as directed by physician", weight: "25ml / 50 ml", price: "Rs. 120/- / 240/-", image: "" },
+  {  medicineName: "Arjun Ghrut", indications: "Cardiac Tonic, Cardiomegaly, Cardiac arrhythmia, Breathlessness due to gastric ailments", doses: "as directed by physician", weight: "100 ml", price: "Rs. 400/-", image: "" },
+  { medicineName: "Chandanadi Yamak", indications: "Useful in burns, boils and skin rashes", doses: "For External Use only", weight: "25 ml", price: "Rs. 110/-", image: "" },
+  {  medicineName: "Takrarishta", indications: "Amoebiasis, useful in piles, worm infestation, Diarrhoea.", doses: "3 teaspoonfuls twice a day after meals or as directed by physician", weight: "100 ml", price: "Rs. 70/-", image: "" },
+  {  medicineName: "Kushmandavleh", indications: "Highly effective in acidity & gastric ulcer, Useful in Jaundice as a Liver tonic", doses: "2 teaspoonfuls twice a day after meals or as directed by physician", weight: "100 gm", price: "Rs. 140/-", image: "" },
+  {  medicineName: "Kasisadi Tel", indications: "Effective on piles, bleeding piles, fissure and fistula, relieve pain and helps in healing", doses: "As advised by the physician", weight: "", price: "", image: "" },
+  { medicineName: "Narayan Tel", indications: "For drinking in vat vyadhi, Nasya, Basti & Body massage also for Pregnant woman", doses: "As advised by the physician", weight: "50 ml", price: "Rs. 165/-", image: "" },
+  {  medicineName: "Kamdhenu Kesh Tel", indications: "Greying Hair, Dandruff, Premature hairfall for pleasant sleep", doses: "Apply to hair roots", weight: "50 ml/ 100 ml", price: "Rs. 200/-", image: "" },
+  {  medicineName: "Lakshadi Tel", indications: "Typhoid, Cough, Cold, Joint pain, Backache, Body odour, for Pregnant woman", doses: "For external application or as directed by physician", weight: "25 ml", price: "Rs. 225/-", image: "" },
+  {  medicineName: "Baladi Tel", indications: "For all Vat vyadhi, Massage oil for weak men, women & children, also for pregnant woman", doses: "For external application or as directed by physician", weight: "50 ml", price: "Rs. 180/-", image: "" },
+  {  medicineName: "Gomutra Aasav", indications: "Relieves common cough and cold. Useful in asthma and Leucoderma", doses: "3 teaspoonfuls twice a day after meals or as directed by physician", weight: "200 ml", price: "Rs. 120/-", image: "" },
+  {  medicineName: "Kamdhenu Bal Pal Ras", indications: "For children below 15 years of age. Acts as a nervine tonic. Improves memory power", doses: "as directed by physician", weight: "100 ml", price: "Rs. 125/-", image: "" },
+  {  medicineName: "Kamdhenu Balya Syrup", indications: "Removes general debility in Males & Females", doses: "2 teaspoonfuls with water twice a day", weight: "100 ml", price: "Rs. 125/-", image: "" },
+  {  medicineName: "Gomyadi Tel", indications: "Useful in all diseases of nose, ear & eyes by Nasal Route", doses: "Only 2 drops at night in nose and ear, 2 drops as and when required", weight: "10 ml", price: "Rs. 35/-", image: "" },
+  {  medicineName: "Arshohar Marham", indications: "Highly effective in piles of all nature. Also heals and relieves fissures and fistula", doses: "as directed by physician", weight: "25 ml", price: "Rs. 100/-", image: "" },
+  {  medicineName: "Kamdudha Ras", indications: "Raktapitta, Diarrhoea with blood, Vertigo, acidity, Rakrapradar", doses: "1-2 pills twice or as directed by physician", weight: "50 ml", price: "", image: "" },
+  {  medicineName: "Laghu Sutshekhar Ras", indications: "Headache, Migraine, Psychosomatic disorder, Insomnia, Acid peptic disorder.", doses: "1-3 pills twice or as directed by physician", weight: "60 tablets", price: "Rs. 125/-", image: "" },
+  {  medicineName: "Vanari Gutika", indications: "Oligospermia, oligozoospermia, Early Ejaculation, Erectile dysfunction, Muscle Tonic.", doses: "as directed by physician", weight: "50 gm", price: "Rs. 300/-", image: "" },
+  {  medicineName: "Kamdhenu Nari Sanjeevani", indications: "Very useful in all female disorders like menstruation problems, White discharge etc.", doses: "2 teaspoonfuls with water every morning and evening", weight: "100 ml", price: "Rs. 125/-", image: "" },
+  {  medicineName: "Kamdhenu Antidandruff Lotion", indications: "Highly effective in alopecia, Atrophy and dandruff. Regular application improves hair quality.", doses: "Apply on wet hair, massage and finally rinse and wash with water", weight: "100 ml", price: "Rs. 125/-", image: "" },
+  {  medicineName: "Kamdhenu Dhoop", indications: "Purifies air in the room", doses: "Use during 'Puja' and at any other time whenever desired.", weight: "12 Sticks Pack", price: "Rs. 20/-", image: "" },
+  {  medicineName: "Kamdhenu Chandan Doop", indications: "Purifies air in room", doses: "Use during 'Puja' and at any other time whenever desired.", weight: "12 Sticks Pack", price: "Rs. 25/-", image: "" },
+  {  medicineName: "Kamdhenu Mosquito Coil", indications: "Mosquito Repellant", doses: "Use at sleep time", weight: "10 Coil Pack", price: "Rs. 50/-", image: "" }
+];
+
+
+const UploadMedicines = () => {
+  const uploadMedicines = async () => {
+    const medicinesCollection = collection(db, 'medicines');
+    for (const medicine of medicinesData) {
+      try {
+        await addDoc(medicinesCollection, medicine);
+        console.log(`${medicine.medicineName} uploaded successfully`);
+      } catch (error) {
+        console.error("Error uploading medicine:", error);
+      }
+    }
+  };
+
+  return (
+    <div>
+      <h1>Upload Medicines</h1>
+      <button onClick={uploadMedicines}>Upload Medicines</button>
+    </div>
+  );
+};
+
+export default UploadMedicines;
