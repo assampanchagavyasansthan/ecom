@@ -35,7 +35,7 @@ function Nav() {
           <ul>
             <li><Link to="/homepage">Home</Link></li>
             <li><Link to="/signeup"></Link></li>
-            <li className="about-link"><Link to="/Aboutpage">About</Link></li> {/* Added class here */}
+            <li><Link to="/Aboutpage">About</Link></li>
             <li><Link to="/firebaseupload"></Link></li>
             <li><Link to="/displayfierbase">Shop</Link></li>
           
@@ -68,7 +68,7 @@ function Nav() {
         <Route path="/signeup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/cardpage" element={<Cart />} />
-        <Route path="/orders" element={<OrderPage />} />
+        <Route path="/orders" element={<OrderPage />} /> {/* Ensure OrderPage receives the order data */}
       </Routes>
     </div>
   );
