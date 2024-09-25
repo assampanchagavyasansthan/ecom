@@ -1,7 +1,7 @@
 /* Mobile */
 @media (max-width: 640px) { 
     .tester {
-        width: 100%;
+        width: auto;
         height: auto; /* Adjust height to a percentage of viewport height */
         background-color: white; /* Background color for mobile */
         padding: 20px; /* Add some padding */
