@@ -1,31 +1,30 @@
-/* Footer.css */
+/* Footer */
 .footer {
   background-color: #2a2a2a;
   color: #fff;
-  padding: 15px 10px; /* Reduced padding for mobile */
+  padding: 30px 10px; /* Increased padding for better spacing */
   font-family: 'Arial', sans-serif;
-  position: relative; 
+  position: relative;
   width: 100%;
   margin: 0 auto;
-  border-radius: 8px;
   max-height: 400px; /* Set a max height to prevent overflow */
   overflow: hidden; /* Hide any overflow content */
 }
 
 .footer__addr {
-  margin-bottom: 15px; /* Adjusted margin */
+  margin-bottom: 20px; /* Adjusted margin */
 }
 
 .footer__logo {
-  font-size: 20px; /* Slightly smaller logo font size */
+  font-size: 20px; /* Logo font size */
   font-weight: bold;
   color: #84c684;
-  margin-bottom: 8px; /* Adjusted margin */
+  margin-bottom: 8px; /* Margin below logo */
 }
 
 .footer__addr h2 {
-  font-size: 16px; /* Smaller font size for headings */
-  margin-bottom: 8px; /* Adjusted margin */
+  font-size: 16px; /* Contact title font size */
+  margin-bottom: 8px; /* Margin below title */
 }
 
 .footer__btn {
@@ -33,24 +32,25 @@
   margin-top: 5px;
   color: #fff;
   text-decoration: none;
-  font-size: 14px; /* Adjusted button font size */
+  font-size: 14px; /* Button font size */
 }
 
 .footer__nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 15px; /* Adjusted gap */
-  margin-bottom: 15px; /* Adjusted margin */
+  gap: 30px; /* Adjusted gap for more space */
+  margin-bottom: 30px; /* Adjusted margin for spacing from other elements */
 }
 
 .nav__item {
-  width: 150px; /* Reduced width for nav items */
+  width: 200px; /* Increased width for nav items */
+  text-align: center; /* Center the text */
 }
 
 .nav__title {
-  font-size: 16px; /* Smaller title font size */
-  margin-bottom: 8px; /* Adjusted margin */
+  font-size: 16px; /* Title font size */
+  margin-bottom: 8px; /* Margin below title */
 }
 
 .nav__ul {
@@ -59,32 +59,34 @@
 }
 
 .nav__ul li {
-  margin-bottom: 5px; /* Adjusted margin */
+  margin-bottom: 10px; /* Spacing between items */
 }
 
 .nav__ul li a {
   color: #ddd;
   text-decoration: none;
-  font-size: 12px; /* Smaller font size for links */
+  font-size: 14px; /* Adjusted font size */
 }
 
 .nav__ul li a:hover {
-  color: #84c684;
+  color: #84c684; /* Hover color */
 }
 
 .social__icons {
   display: flex;
   justify-content: center; /* Center align icons */
   margin-top: 10px;
+  gap: 15px; /* Add spacing between icons */
 }
 
 .social__icons a {
   color: #fff;
+  font-size: 30px; /* Icon size */
   transition: color 0.3s ease;
 }
 
 .social__icons a:hover {
-  color: #84c684;
+  color: #84c684; /* Hover color */
 }
 
 /* Legal section positioned at bottom right */
@@ -93,35 +95,42 @@
   bottom: 10px;
   right: 15px;
   text-align: right;
-  font-size: 12px; /* Smaller legal text */
+  font-size: 12px; /* Legal text size */
 }
 
 .legal__links {
-  margin-top: 5px; /* Adjusted margin */
+  margin-top: 5px;
 }
 
 .heart {
   color: red;
 }
 
+/* Media Query for mobile */
 @media (max-width: 768px) {
   .footer {
-    padding: 10px; /* Further reduce padding on smaller screens */
+    padding: 20px; /* Reduced padding on smaller screens */
   }
 
   .footer__nav {
-    flex-direction: column; /* Stack nav items */
+    flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center items */
+    gap: 20px; /* Adjusted gap */
   }
 
   .nav__item {
     width: 100%; /* Full width for nav items */
-    text-align: left; /* Align text to the left */
+    text-align: center; /* Center text */
   }
 
   .legal {
     position: static;
     text-align: center;
     margin-top: 10px; /* Adjusted margin */
+  }
+
+  .social__icons {
+    justify-content: space-between; /* Spread icons evenly */
+    width: 100%; /* Full width on smaller screens */
   }
 }
