@@ -119,7 +119,7 @@
   }
 
   .nav__item {
-    width: 80%; /* Full width for nav items */
+    width: 90%; /* Full width for nav items */
     text-align: center; /* Center text */
   }
 
@@ -131,6 +131,6 @@
 
   .social__icons {
     justify-content: space-between; /* Spread icons evenly */
-    width: 90%; /* Full width on smaller screens */
+    width: 100%; /* Full width on smaller screens */
   }
 }
