@@ -106,7 +106,7 @@ a {
   }
 
   button {
-    width: 100%; /* Full width for buttons */
+    width: 80%; /* Full width for buttons */
     padding: 12px; /* Slightly larger padding */
   }
 }
@@ -117,7 +117,7 @@ a {
   }
 
   .cart-item img {
-    width: 60px; /* Smaller image for very small screens */
+    width: 40px; /* Smaller image for very small screens */
   }
 
   .cart-item h2 {
