@@ -23,6 +23,10 @@ function Nav() {
     setShowSidebar(prev => !prev);
   };
 
+  const closeSidebar = () => {
+    setShowSidebar(false); // Close the sidebar
+  };
+
   // Example order data, replace this with actual order data from your application
   const orderData = {
     id: '12345',
@@ -41,13 +45,13 @@ function Nav() {
             <FaBars style={{ fontSize: '24px', cursor: 'pointer' }} />
           </div>
           <ul className={showSidebar ? 'active' : ''}>
-            <li><Link to="/homepage">Home</Link></li>
-            <li><Link to="/signeup"></Link></li>
-            <li><Link to="/Aboutpage">About</Link></li>
-            <li><Link to="/firebaseupload"></Link></li>
-            <li><Link to="/displayfierbase">Shop</Link></li>
+            <li><Link to="/homepage" onClick={closeSidebar}>Home</Link></li>
+            <li><Link to="/signeup" onClick={closeSidebar}>Sign Up</Link></li>
+            <li><Link to="/Aboutpage" onClick={closeSidebar}>About</Link></li>
+            <li><Link to="/firebaseupload" onClick={closeSidebar}>Upload</Link></li>
+            <li><Link to="/displayfierbase" onClick={closeSidebar}>Shop</Link></li>
             <li>
-              <Link to="/cardpage">
+              <Link to="/cardpage" onClick={closeSidebar}>
                 <FaShoppingCart style={{ marginRight: '5px' }} /> Cart
               </Link>
             </li>
@@ -57,10 +61,10 @@ function Nav() {
               </div>
               {showProfileOptions && (
                 <div className="profile-dropdown">
-                  <Link to="/login" onClick={() => setShowProfileOptions(false)}>Log In</Link>
-                  <Link to="/signeup" onClick={() => setShowProfileOptions(false)}>Sign Up</Link>
-                  <Link to="/orders" state={{ order: orderData }} onClick={() => setShowProfileOptions(false)}>My Orders</Link>
-                  <Link to="/logout" onClick={() => setShowProfileOptions(false)}>Logout</Link>
+                  <Link to="/login" onClick={() => { setShowProfileOptions(false); closeSidebar(); }}>Log In</Link>
+                  <Link to="/signeup" onClick={() => { setShowProfileOptions(false); closeSidebar(); }}>Sign Up</Link>
+                  <Link to="/orders" state={{ order: orderData }} onClick={() => { setShowProfileOptions(false); closeSidebar(); }}>My Orders</Link>
+                  <Link to="/logout" onClick={() => { setShowProfileOptions(false); closeSidebar(); }}>Logout</Link>
                 </div>
               )}
             </li>
