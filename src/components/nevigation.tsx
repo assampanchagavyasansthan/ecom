@@ -46,9 +46,9 @@ function Nav() {
           </div>
           <ul className={showSidebar ? 'active' : ''}>
             <li><Link to="/homepage" onClick={closeSidebar}>Home</Link></li>
-            <li><Link to="/signeup" onClick={closeSidebar}>Sign Up</Link></li>
+            <li><Link to="/signeup" onClick={closeSidebar}></Link></li>
             <li><Link to="/Aboutpage" onClick={closeSidebar}>About</Link></li>
-            <li><Link to="/firebaseupload" onClick={closeSidebar}>Upload</Link></li>
+            <li><Link to="/firebaseupload" onClick={closeSidebar}></Link></li>
             <li><Link to="/displayfierbase" onClick={closeSidebar}>Shop</Link></li>
             <li>
               <Link to="/cardpage" onClick={closeSidebar}>
