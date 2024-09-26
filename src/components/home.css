@@ -1,15 +1,57 @@
+/* Ensure box-sizing includes padding and border in width calculations */
+* {
+  box-sizing: border-box;
+}
 
+/* Image Box */
+.image-box {
+  position: absolute;
+  background-image: url('/h2.jpg');
+  left: 100px;
+  top: 120px;
+  width: 1300px;
+  height: 471px;
+  border-radius: 30px;
+  background-color: #f0f0f0;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Mid Box */
+.midbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  left: 100px;
+  width: 1300px;
+  gap: 100px;
+  padding: 10px;
+  background-color: #f4f4f4;
+}
+
+.box {
+  flex: 1;
+  background-color: #fffdfd;
+  padding: 20px;
+  height: 170px;
+  text-align: center;
+  border: 1px solid #fbf4f4;
+}
+
+/* Grid Container */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 10px;
   padding: 20px;
   background-color: #f0f0f0;
-  position: absolute;
-  top: 23;
-  left:100px;
-  width: 1300px;
+  width: 100%; /* Make it responsive */
+  max-width: 1300px;
+  margin: 0 auto; /* Center the grid */
+  position: relative; /* Removes absolute positioning */
+  min-height: 100vh; /* Ensures the grid takes at least full viewport height */
+  margin-bottom: 50px; /* Adds space between the grid and footer */
 }
 
 .grid-item {
@@ -22,50 +64,61 @@
   width: 300px;
   height: 350px;
 }
-.image-box {
-  position: absolute;
-  background-image: url('/h2.jpg'); 
-  left: 100px;
-  top: 120px;
-  width: 1300px;
-  height: 471px;
-  border-radius: 30px;
-  background-color: #f0f0f0;
-}
 
-
-.backgroundbox{
-  width:100px;
-
+/* Background Box */
+.backgroundbox {
+  width: 100px;
   height: 600px;
 }
 
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .image-box {
+    width: 100%; /* Full width */
+    left: 0;
+  }
 
-.threemidle{
+  .midbox {
+    width: 100%; /* Full width */
+    left: 0;
+    flex-direction: column; /* Stack boxes vertically */
+    gap: 20px;
+    padding: 20px;
+  }
 
-  width:100px;
- 
-  height: 750px;
+  .grid-container {
+    width: 100%; /* Full width */
+    left: 0;
+    grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
+  }
+
+  .grid-item {
+    width: 100%;
+    height: auto;
+  }
 }
 
-.midbox {
-  display: flex;         /* Use Flexbox layout */
-  justify-content: space-between; /* Distribute space between items */
-  align-items: center;
-  position: relative;
-  left: 100px;
-   width: 1300px;   /* Center items vertically */
-  gap: 100px;             /* Optional: add space between boxes */
-  padding: 10px;         /* Optional: add padding around the container */
-  background-color: #f4f4f4; /* Optional: add background color */
-}
+@media (max-width: 768px) {
+  .image-box {
+    width: 100%;
+    height: 300px; /* Reduce height for smaller screens */
+    left: 0;
+  }
 
-.box {
-  flex: 1;               /* Allow boxes to grow and shrink equally */
-  background-color: #fffdfd; /* Optional: add background color */
-  padding: 20px; 
-  left: 100px;
-  height: 170px;        /* Optional: add padding inside boxes */
-  text-align: center;    /* Center text inside boxes */
-  border: 1px solid #fbf4f4; /* Optional: add border around boxes */
+  .midbox {
+    width: 100%;
+    left: 0;
+    gap: 10px;
+  }
+
+  .grid-container {
+    width: 100%;
+    left: 0;
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
+
+  .grid-item {
+    width: 100%;
+    height: auto;
+  }
 }
