@@ -12,7 +12,7 @@ const HomePage = () => {
         
         <div className="content">
         <div className="image-box">
-          image box
+          
         </div></div>
       
         <div className="midbox">
