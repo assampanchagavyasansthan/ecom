@@ -59,11 +59,13 @@ button {
   background-color: #3498db;
   color: white;
   border: none;
-  padding: 20px 100px; /* Maintain original size */
+  padding: 10px 20px; /* Maintain original size */
   margin: 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 200px; /* Set a fixed width for buttons */
+  text-align: center; /* Center the text */
 }
 
 button:hover {
@@ -113,6 +115,10 @@ a {
     gap: 10px; /* Space between buttons */
     width: 100%; /* Ensure full width for alignment */
   }
+
+  .button-container button {
+    width: 200px; /* Same width for buttons in mobile view */
+  }
 }
 
 @media (max-width: 400px) {
@@ -130,5 +136,9 @@ a {
 
   .cart-item p {
     font-size: 10px; /* Even smaller font */
+  }
+
+  .button-container button {
+    width: 150px; /* Adjust size for very small screens */
   }
 }
