@@ -110,7 +110,7 @@
     top: 60px; /* Below the nav */
     left: 0;
     width: 100%;
-    background: rgba(166, 237, 158, 0.2);
+     background: rgba(255, 255, 255, 1.7);
   }
 
   .menu ul.active {
