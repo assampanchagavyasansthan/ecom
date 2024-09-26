@@ -59,7 +59,7 @@ button {
   background-color: #3498db;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 20px 100px; /* Maintain original size */
   margin: 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -105,9 +105,13 @@ a {
     font-size: 12px; /* Smaller font for mobile */
   }
 
-  button {
-    width: 80%; /* Full width for buttons */
-    padding: 12px; /* Slightly larger padding */
+  .button-container {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center align */
+    gap: 10px; /* Space between buttons */
+    width: 100%; /* Ensure full width for alignment */
   }
 }
 
@@ -117,7 +121,7 @@ a {
   }
 
   .cart-item img {
-    width: 40px; /* Smaller image for very small screens */
+    width: 60px; /* Smaller image for very small screens */
   }
 
   .cart-item h2 {
@@ -126,9 +130,5 @@ a {
 
   .cart-item p {
     font-size: 10px; /* Even smaller font */
-  }
-
-  button {
-    padding: 10px; /* Adjust button padding */
   }
 }
